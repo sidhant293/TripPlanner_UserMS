@@ -83,5 +83,13 @@ public class UserAPI {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, environment.getProperty(e.getMessage()));
 		}
 	}
+	
+	@GetMapping(value = "/removeRefresh")
+	public ResponseEntity<TokenDTO> removeRefreshToken( HttpServletResponse response) {
+			TokenDTO token=new TokenDTO();
+			token.setRefreshToken(null);
+			setTokenCookie(response,token);
+			return new ResponseEntity<TokenDTO>(token,HttpStatus.OK);
+	}
 
 }
